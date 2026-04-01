@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Enforce_Credit_Limit</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+  ISPICKVAL(StageName, &quot;Closed Won&quot;),
+  Account.Total_Open_Pipeline__c &gt; Account.Credit_Limit__c,
+  Account.Credit_Limit__c &gt; 0,
+  NOT(Account.Bypass_Credit_Validation__c)
+)</errorConditionFormula>
+    <errorMessage>Cannot close this Opportunity. Account has exceeded its credit limit.</errorMessage>
+</ValidationRule>
